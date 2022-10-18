@@ -398,6 +398,7 @@
                                                     <p> {{$chat->message}}</p>
                                                     <span class="time">10:20 am</span>
                                                 </li>
+                                                @endif
                                                 @empty
                                                 @endforelse
 
@@ -408,9 +409,9 @@
 
                                     <div class="send-box">
                                         <form action="">
-                                            <input type="text" class="form-control" aria-label="message…" placeholder="Write message…">
+                                            <input wire:model="message" type="text" class="form-control" aria-label="message…" placeholder="Write message…">
 
-                                            <button type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
+                                            <button type="button" wire:click="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
                                         </form>
 
                                         <div class="send-btns">

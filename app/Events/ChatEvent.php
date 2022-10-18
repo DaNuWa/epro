@@ -15,7 +15,7 @@ class ChatEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     
-    public function __construct(public $message)
+    public function __construct(public $message,public $sender_id,public $reciever_id)
     {
        
     }
@@ -23,6 +23,6 @@ class ChatEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('chat.1.2');
+        return new Channel("chat.".$this->sender_id.".".$this->reciever_id);
     }
 }

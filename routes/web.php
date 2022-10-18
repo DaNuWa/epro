@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/', ProviderShowcase::class);
+Route::get('/', ProviderShowcase::class)->name('home');
 Route::get('/profile/{profile}', ProductDetail::class)->name('profile.view');
 Route::get('/chat/{profile}', Chat::class)->name('chat.view');
 Route::get('/user', function () {
