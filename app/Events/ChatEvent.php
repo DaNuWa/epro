@@ -23,6 +23,6 @@ class ChatEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('chat');
+        return new Channel('chat.1.2');
     }
 }

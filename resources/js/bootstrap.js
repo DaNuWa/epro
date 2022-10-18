@@ -26,11 +26,6 @@ window.Pusher = Pusher;
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: import.meta.env.VITE_PUSHER_APP_KEY,
-    forceTLS: false,
-    encrypted: import.meta.env.VITE_PUSHER_ENCRYPTED === 'true', //this is why I had that encrypted env setting :)
-    wsHost: import.meta.env.VITE_PUSHER_HOST,
-    wsPort: import.meta.env.VITE_PUSHER_PORT,
-    wssPort: import.meta.env.VITE_PUSHER_PORT,
-    disableStats: true,
-    enabledTransports: ['ws', 'wss'],
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    forceTLS: true
 });
