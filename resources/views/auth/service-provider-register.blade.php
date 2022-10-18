@@ -11,40 +11,40 @@
 
             <!-- Name -->
             <div>
-                <x-input-label for="first_name" :value="__('FirstName')" />
+                <x-input-label for="holder_name" :value="__('HolderName')" />
 
-                <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus />
+                <x-text-input id="holder_name" class="block mt-1 w-full" type="text" name="holder_name" :value="old('holder_name')" required autofocus />
 
-                <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+                <x-input-error :messages="$errors->get('holder_name')" class="mt-2" />
             </div>
 
 
 
             <div class="mt-4">
-                <x-input-label for="last_name" :value="__('LastName')" />
+                <x-input-label for="bank_name" :value="__('BankName')" />
 
-                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required />
+                <x-text-input id="bank_name" class="block mt-1 w-full" type="text" name="bank_name" :value="old('bank_name')" required />
 
-                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                <x-input-error :messages="$errors->get('last_nabank_nameme')" class="mt-2" />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" />
+                <x-input-label for="branch_name" :value="__('BranchName')" />
 
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-text-input id="branch_name" class="block mt-1 w-full" type="text" name="branch_name" :value="old('branch_name')" required />
 
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-input-error :messages="$errors->get('branch_name')" class="mt-2" />
             </div>
 
 
 
             <div class="mt-4">
-                <x-input-label for="mobile" :value="__('Mobile')" />
+                <x-input-label for="branch_code" :value="__('BranchCode')" />
 
-                <x-text-input id="mobile" class="block mt-1 w-full" type="text" name="mobile" :value="old('mobile')" required />
+                <x-text-input id="mobbranch_codeile" class="block mt-1 w-full" type="text" name="branch_code" :value="old('branch_code')" required />
 
-                <x-input-error :messages="$errors->get('mobile')" class="mt-2" />
+                <x-input-error :messages="$errors->get('branch_code')" class="mt-2" />
             </div>
 
 
@@ -52,32 +52,19 @@
             
             <!-- Password -->
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
+                <x-input-label for="account_number" :value="__('AccountNumber')" />
 
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
+                <x-text-input id="account_number" class="block mt-1 w-full"
+                                type="text"
+                                name="account_number"
+                                required  />
 
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->get('account_number')" class="mt-2" />
             </div>
 
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-            </div>
-
+       
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
+            
                 <x-primary-button class="ml-4">
                     {{ __('Register') }}
                 </x-primary-button>

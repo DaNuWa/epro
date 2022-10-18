@@ -11,17 +11,17 @@
     <div class="ms-md-5 mt-2 mt-md-0">
       <a type="button" class="btn btn-outline-primary fw-500 rounded ">
         <i class="fa-solid fa-user me-lg-2"></i>
-        <p class="d-none d-lg-inline">Sign in</p>
+        <p wire:click="signin" class="d-none d-lg-inline">Sign in</p>
       </a>
     </div>
     @else
     <div class="ms-md-5 mt-2 mt-md-0">
       <a type="button" class="btn btn-outline-primary fw-500 rounded ">
         <i class="fa-solid fa-user me-lg-2"></i>
-        <p class="d-none d-lg-inline">Sign out</p>
+        <p wire::click="logout" class="d-none d-lg-inline">Sign out</p>
       </a>
       <a type="button" class="btn btn-outline-primary fw-500 rounded ">
-      <p class="d-none d-lg-inline">Register as service provider</p>
+      <p wire::click="regiserAsServiceProvider" class="d-none d-lg-inline">Register as service provider</p>
       </a>
     </div>
     @endif

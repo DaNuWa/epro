@@ -2,6 +2,7 @@
 
 use App\Events\ChatEvent;
 use App\Events\OrderShipped;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Livewire\Chat;
 use App\Http\Livewire\ProductDetail;
 use App\Http\Livewire\ProviderShowcase;
@@ -23,6 +24,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('serviceprovider/register',[RegisteredUserController::class,'serviceProviderCreate'])->name('serviceprovider.register');
 
 
 Route::get('/', ProviderShowcase::class)->name('home');
