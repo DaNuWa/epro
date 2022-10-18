@@ -13,7 +13,7 @@
           <h5 class="card-title">Rs {{$profile->rate}}</h5>
           <h6 class="card-subtitle mb-2 text-bold">{{$profile->title}}</h6>
 
-          <a href="{{route('profile.view',)}}" role="button" class="btn btn-primary card-link py-2 px-4">View my profile</a>
+          <a href="{{route('profile.view',$profile)}}" role="button" class="btn btn-primary card-link py-2 px-4">View my profile</a>
           <a href="#" class="btn btn-outline-primary card-link "> <i class="fa-solid fa-heart"></i></a>
         </div>
       </div>

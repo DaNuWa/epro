@@ -27,6 +27,8 @@
 			<div class="product-dtl">
 				<div class="product-info">
 					<div class="product-name">{{$profile->title}}</div>
+					<button wire:click="chat" class="bg-info border-0 p-3" style='font-size:16px'>Lets have a chat first <i class='far fa-comment-dots'></i></button>
+
 					<div class="reviews-counter">
 						<div class="rate">
 							<input type="radio" id="star5" name="rate" value="5" @checked($overallRate>=1) />

@@ -387,44 +387,19 @@
                                     <div class="modal-body">
                                         <div class="msg-body">
                                             <ul>
+                                                @forelse($chats as $chat)
+                                                @if($chat->sender_id==auth()->id())
                                                 <li class="sender">
-                                                    <p> Hey, Are you there? </p>
+                                                    <p> {{$chat->message}} </p>
                                                     <span class="time">10:06 am</span>
                                                 </li>
-                                                <li class="sender">
-                                                    <p> Hey, Are you there? </p>
-                                                    <span class="time">10:16 am</span>
-                                                </li>
+                                                @else
                                                 <li class="repaly">
-                                                    <p> Last Minute Festive Packages From Superbreak</p>
+                                                    <p> {{$chat->message}}</p>
                                                     <span class="time">10:20 am</span>
                                                 </li>
-                                                <li class="sender">
-                                                    <p> Hey, Are you there? </p>
-                                                    <span class="time">10:26 am</span>
-                                                </li>
-                                                <li class="sender">
-                                                    <p> Hey, Are you there? </p>
-                                                    <span class="time">10:32 am</span>
-                                                </li>
-                                                <li class="repaly">
-                                                    <p>Last Minute Festive Packages From Superbreak</p>
-                                                    <span class="time">10:35 am</span>
-                                                </li>
-                                                <li>
-                                                    <div class="divider">
-                                                        <h6>Today</h6>
-                                                    </div>
-                                                </li>
-
-                                                <li class="repaly">
-                                                    <p> Last Minute Festive Packages From Superbreak</p>
-                                                    <span class="time">10:36 am</span>
-                                                </li>
-                                                <li class="repaly">
-                                                    <p>Last Minute Festive Packages From Superbreak</p>
-                                                    <span class="time">junt now</span>
-                                                </li>
+                                                @empty
+                                                @endforelse
 
                                             </ul>
                                         </div>
@@ -472,14 +447,3 @@
         </div>
 </div>
     <!-- char-area -->
-
-@push('scripts')
-<script type="module">
-    console.log(Echo.channel('chat'))
-Echo.channel('chat')
-        .listen('ChatEvent', (e) => {
-            console.log(222222);
-        });
-  
-    </script>
-@endpush

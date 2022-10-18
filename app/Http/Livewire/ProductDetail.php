@@ -24,6 +24,10 @@ class ProductDetail extends Component
         }
     }
 
+    public function chat(){
+        return to_route('chat.view',$this->profile->id);
+    }
+
     public function render()
     {
         return view('livewire.product-detail')->extends('welcome');

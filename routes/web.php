@@ -1,7 +1,13 @@
 <?php
 
+use App\Events\ChatEvent;
+use App\Events\OrderShipped;
+use App\Http\Livewire\Chat;
+use App\Http\Livewire\ProductDetail;
+use App\Http\Livewire\ProviderShowcase;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +21,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+
+Route::get('/', ProviderShowcase::class);
+Route::get('/profile/{profile}', ProductDetail::class)->name('profile.view');
+Route::get('/chat/{profile}', Chat::class)->name('chat.view');
+Route::get('/user', function () {
+    return view('dashboard');
 });
 
 Route::get('/dashboard', function () {
