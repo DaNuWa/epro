@@ -5,18 +5,18 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div id="slider" class="owl-carousel product-slider">
-				@forelse($profile->photos as $photo)
+			@forelse($profile->getMedia('projectimages') as $photo)
 				<div class="item">
-					<img src="{{$photo->path}}" />
+				<img src="{{asset('media/'.$photo->id.'/'.$photo->file_name)}}" />
 				</div>
 				@empty
 				@endforelse
 
 			</div>
 			<div id="thumb" class="owl-carousel product-thumb">
-				@forelse($profile->photos as $photo)
+				@forelse($profile->getMedia('projectimages') as $photo)
 				<div class="item">
-					<img src="{{$photo->path}}" />
+					<img src="{{asset('media/'.$photo->id.'/'.$photo->file_name)}}" />
 				</div>
 				@empty
 				@endforelse

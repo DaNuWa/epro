@@ -10,36 +10,46 @@ class Chat extends Component
 {
 
 
-public $message='';
+    public $message = '';
+    public $channel='';
 
-    public function mount(Profile $profile){
+    public function mount(Profile $profile)
+    {
 
-        $this->profile=$profile;
+        $this->profile = $profile;
     }
 
     public function getListeners()
     {
 
-        $channel='chat.'.auth()->id().'.'.$this->profile->user->id;
+        if(auth()->id()> $this->profile->user->id){
+            $this->channel = 'chat.' . auth()->id() . '.' . $this->profile->user->id;
+
+        }else{
+            $this->channel = 'chat.' .$this->profile->user->id . '.' . auth()->id();
+
+        }
         return [
-            "echo: $channel,ChatEvent" => 'updateChat',
+            "echo: $this->channel,ChatEvent" => 'updateChat',
         ];
     }
 
-  
+
     public function updateChat($event)
     {
         $this->render();
     }
 
-    public function sendMessage(){
-        \App\Models\Chat::create(['sender_id'=>auth()->id(),
-        'receiver_id'=>$this->profile->user->id,
-        'message'=>$this->message]);
+    public function sendMessage()
+    {
+        \App\Models\Chat::create([
+            'sender_id' => auth()->id(),
+            'receiver_id' => $this->profile->user->id,
+            'message' => $this->message
+        ]);
 
-        event(new ChatEvent($this->message,auth()->id(),$this->profile->user->id));
-        $this->message='';
-
+        event(new ChatEvent($this->message, auth()->id(), $this->profile->user->id));
+        $this->message = '';
     }
 
     public function render()
@@ -48,13 +58,14 @@ public $message='';
         return view('livewire.chat')->extends('welcome');
     }
 
-    public function getChats(){
-        $this->chats=\App\Models\Chat::where(function($q){
-            $q->where('sender_id',auth()->id())
-            ->orWhere('sender_id',$this->profile->user->id);
-        }) ->where(function($q){
-            $q->where('receiver_id',auth()->id())
-            ->orWhere('receiver_id',$this->profile->user->id);
+    public function getChats()
+    {
+        $this->chats = \App\Models\Chat::where(function ($q) {
+            $q->where('sender_id', auth()->id())
+                ->orWhere('sender_id', $this->profile->user->id);
+        })->where(function ($q) {
+            $q->where('receiver_id', auth()->id())
+                ->orWhere('receiver_id', $this->profile->user->id);
         })->get();
     }
 }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+
+    
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class,'category_profiles');
+    }
 }

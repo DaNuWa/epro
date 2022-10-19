@@ -1,5 +1,3 @@
-
-    <!-- char-area -->
     <div class="message-area">
         <div class="container">
             <div class="row">
@@ -447,4 +445,3 @@
         </div>
         </div>
 </div>
-    <!-- char-area -->

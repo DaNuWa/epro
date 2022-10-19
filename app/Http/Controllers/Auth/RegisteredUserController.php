@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Card;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -28,14 +29,11 @@ class RegisteredUserController extends Controller
         return view('auth.service-provider-register');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
+    public function serviceProviderregister(Request $request)
+    {
+        Card::create($request->validated());
+
+    }
     public function store(Request $request)
     {
         $request->validate([
