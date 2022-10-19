@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="chat-area">
-                    <!-- chatlist -->
                     <div class="chatlist">
                         <div class="modal-dialog-scrollable">
                             <div class="modal-content">
@@ -24,11 +23,9 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <!-- chat-list -->
                                     <div class="chat-lists">
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="Open" role="tabpanel" aria-labelledby="Open-tab">
-                                                <!-- chat-list -->
                                                 <div class="chat-list">
                                                     @forelse($chatusers as $chatuser)
                                                     <a wire:key="{{$chatuser->id}}" href="#" wire:click.prevent="updateChatUser({{$chatuser}})" class="d-flex align-items-center">
@@ -46,7 +43,6 @@
 
 
                                                 </div>
-                                                <!-- chat-list -->
                                             </div>
                                             <div class="tab-pane fade" id="Closed" role="tabpanel" aria-labelledby="Closed-tab">
 
@@ -204,16 +200,11 @@
                                         </div>
 
                                     </div>
-                                    <!-- chat-list -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- chatlist -->
-
-
-
-                    <!-- chatbox -->
+                
                     <div class="chatbox">
                         <div class="modal-dialog-scrollable">
                             <div class="modal-content">
@@ -249,28 +240,7 @@
                                     </div>
                                 </div>
 
-
-                                <div class="modal-body">
-                                    <div class="msg-body">
-                                        <ul x-data="{ scroll: () => { $el.scrollTo(0, $el.scrollHeight); }}" x-init="scroll()">
-                                            @forelse($chats as $chat)
-                                            @if($chat->sender_id==auth()->id())
-                                            <li class="sender">
-                                                <p> {{$chat->message}} </p>
-                                                <span class="time">10:06 am</span>
-                                            </li>
-                                            @else
-                                            <li class="repaly">
-                                                <p> {{$chat->message}}</p>
-                                                <span class="time">10:20 am</span>
-                                            </li>
-                                            @endif
-                                            @empty
-                                            @endforelse
-
-                                        </ul>
-                                    </div>
-                                </div>
+                                <livewire:chatlist key="{{ Str::random() }}" :user="$user">
 
 
                                 <div class="send-box">
@@ -309,7 +279,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- chatbox -->
 
 
             </div>

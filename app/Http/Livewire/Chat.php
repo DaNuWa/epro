@@ -22,16 +22,22 @@ class Chat extends Component
     public function getListeners()
     {
 
-        if(auth()->id()> $this->profile->user->id){
-            $this->channel = 'chat.' . auth()->id() . '.' . $this->profile->user->id;
+        $id=$this->profile->user->id??0;
+        $auth_id=auth()->id();
+
+        if(auth()->id()>  $id){
+            $this->channel = "chat.$auth_id.$id";
 
         }else{
-            $this->channel = 'chat.' .$this->profile->user->id . '.' . auth()->id();
+            $this->channel = "chat.$id.$auth_id";
 
         }
-        return [
-            "echo: $this->channel,ChatEvent" => 'updateChat',
-        ];
+
+            return [
+                "echo:$this->channel,ChatEvent" => 'updateChat',
+            ];
+        
+       
     }
 
 

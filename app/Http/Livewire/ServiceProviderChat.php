@@ -11,8 +11,9 @@ class ServiceProviderChat extends Component
 
 
     public $message = '';
-    public $chatusers=[];
-    public $channel='';
+    public $chatusers = [];
+    public $channel = '';
+    public $user;
 
     public function mount()
     {
@@ -20,35 +21,20 @@ class ServiceProviderChat extends Component
         $this->user = new User();
     }
 
-    public function getListeners()
-    {
-        $id=$this->user['id']??0;
-        $auth_id=auth()->id();
 
-        if(auth()->id()>  $id){
-            $this->channel = "chat.$auth_id.$id";
-
-        }else{
-            $this->channel = "chat.$id.$auth_id";
-
-        }
-
-        return [
-            "echo: $this->channel,ChatEvent" => 'updateChat',
-        ];
-    }
 
 
 
     public function updateChat($event)
-    {dd(55);
+    {
         $this->render();
     }
 
-    public function updateChatUser($user){
-        $this->user=$user;
-        $this->getListeners();
-        }
+    public function updateChatUser($user)
+    {
+        $this->emit('updateNewUser');
+        $this->user = $user;
+    }
 
     public function sendMessage()
     {
@@ -62,32 +48,22 @@ class ServiceProviderChat extends Component
         $this->message = '';
     }
 
-    public function getChats()
-    {
-        $this->chats = \App\Models\Chat::where(function ($q) {
-            $q->where('sender_id', auth()->id())
-                ->orWhere('sender_id', $this->user['id']);
-        })->where(function ($q) {
-            $q->where('receiver_id', auth()->id())
-                ->orWhere('receiver_id', $this->user['id']);
-        })->get();
-    }
 
 
-    
+
+
     public function gotMessages()
     {
 
-        $chat_user_ids=\App\Models\Chat::RecievedMessages()->pluck('sender_id')->toArray();
-        $this->chatusers = User::whereIn('id',$chat_user_ids)->get();
+        $chat_user_ids = \App\Models\Chat::RecievedMessages()->pluck('sender_id')->toArray();
+        $this->chatusers = User::whereIn('id', $chat_user_ids)->get();
     }
 
-    
+
 
 
     public function render()
     {
-        $this->getChats();
         $this->gotMessages();
         return view('livewire.service-provider-chat')->extends('dashboard');
     }
