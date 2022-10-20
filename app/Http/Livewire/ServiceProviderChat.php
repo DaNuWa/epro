@@ -15,14 +15,13 @@ class ServiceProviderChat extends Component
     public $channel = '';
     public $user;
 
+    protected $listeners=['updateNewUser'=>'updateChatUser'];
+
     public function mount()
     {
 
         $this->user = new User();
     }
-
-
-
 
 
     public function updateChat($event)
@@ -32,7 +31,7 @@ class ServiceProviderChat extends Component
 
     public function updateChatUser($user)
     {
-        $this->emit('updateNewUser');
+      
         $this->user = $user;
     }
 

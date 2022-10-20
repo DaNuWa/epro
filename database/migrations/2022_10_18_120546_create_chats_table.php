@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('sender_id');
             $table->foreignId('receiver_id');
             $table->string('message');
+            $table->boolean('is_read')->default(false);
             $table->string('type')->default('text');
             $table->timestamps();
         });

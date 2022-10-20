@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Events\ChatEvent;
 use App\Models\Profile;
-use App\Models\User;
 use Livewire\Component;
 
 class Chat extends Component
@@ -12,21 +11,14 @@ class Chat extends Component
 
 
     public $message = '';
-    public $chatusers = [];
-    public $channel = '';
-    public $user;
-
-    protected $listeners=['updateNewUser'=>'updateChatUser'];
+    public $channel='';
 
     public function mount(Profile $profile)
     {
 
         $this->profile = $profile;
-
-        $this->user = new User();
     }
 
-    
     public function getListeners()
     {
 
@@ -54,12 +46,6 @@ class Chat extends Component
         $this->render();
     }
 
-    public function updateChatUser($user)
-    {
-      
-        $this->user = $user;
-    }
-
     public function sendMessage()
     {
         \App\Models\Chat::create([
@@ -71,17 +57,11 @@ class Chat extends Component
         event(new ChatEvent($this->message, auth()->id(), $this->profile->user->id));
         $this->message = '';
     }
-    
 
-
-
-
-
-    public function gotMessages()
+    public function render()
     {
-
-        $chat_user_ids = \App\Models\Chat::RecievedMessages()->pluck('sender_id')->toArray();
-        $this->chatusers = User::whereIn('id', $chat_user_ids)->get();
+        $this->getChats();
+        return view('livewire.chat')->extends('welcome');
     }
 
     public function getChats()
@@ -94,13 +74,4 @@ class Chat extends Component
                 ->orWhere('receiver_id', $this->profile->user->id);
         })->get();
     }
-
-    public function render()
-    {
-        $this->gotMessages();
-        $this->getChats();
-        return view('livewire.chat')->extends('welcome');
-    }
-
-
 }

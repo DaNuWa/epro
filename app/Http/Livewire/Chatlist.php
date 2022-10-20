@@ -7,18 +7,10 @@ use Livewire\Component;
 
 class Chatlist extends Component
 {
-    protected $listeners=['updateNewUser'];
     public function mount(User $user)
     {
         $this->user=$user;
       
-    }
-
-    public function updateNewUser( )
-    {dd(555);
-        
-        $this->user = $user;
-        $this->getListeners();
     }
 
 
@@ -37,7 +29,7 @@ class Chatlist extends Component
 
         if($id>0){
             return [
-                "echo:$this->channel,ChatEvent" => 'updateChat',
+                "echo:$this->channel,ChatEvent" => 'render',
             ];
         }
        

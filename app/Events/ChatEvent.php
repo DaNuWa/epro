@@ -23,6 +23,11 @@ class ChatEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel("chat.".$this->sender_id.".".$this->reciever_id);
+        if($this->sender_id>$this->reciever_id){
+            $channel="chat.".$this->sender_id.".".$this->reciever_id;
+        }else{
+            $channel="chat.".$this->reciever_id.".".$this->sender_id;
+        }
+        return new Channel($channel);
     }
 }
