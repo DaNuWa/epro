@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Chat;
+use App\Models\User;
 use Livewire\Component;
 
 class Chatuser extends Component
@@ -10,20 +11,27 @@ class Chatuser extends Component
 
     public $isRead;
     public $lastChat;
-    public function mount($chatuser)
+    public function mount( $chatuser)
     {
         $this->chatuser = $chatuser;
+        $this->chatuser_id = $chatuser['id'];
+        $this->retLastChat();
+      
+    }
+
+    public function retLastChat(){
         $this->lastChat = Chat::where(function ($q) {
             $q->where('sender_id', auth()->id())
                 ->orWhere('sender_id', $this->chatuser['id']);
         })->where(function ($q) {
             $q->where('receiver_id', auth()->id())
                 ->orWhere('receiver_id', $this->chatuser['id']);
-        })->latest()->first();
+        })->latest()->first(); 
+        $this->lastchatid = $this->lastChat['id'];
 
-        $this->isRead=$this->lastChat->is_read;
+        $this->isRead=$this->lastChat->sender_id==auth()->id()?true:$this->lastChat->is_read;
 
-        $this->lastMessage=$this->lastChat->message ?? '';
+       $this->lastMessage=$this->lastChat->message ?? '';
     }
 
     public function getListeners()
@@ -46,10 +54,8 @@ class Chatuser extends Component
 
     public function updateLastMessage($event)
     {
-        if($event['sender_id']!==auth()->id()){
-            $this->isRead=false;
-        }
-        $this->lastMessage = $event['message'];
+        $this->retLastChat();
+        
     }
 
     public function render()

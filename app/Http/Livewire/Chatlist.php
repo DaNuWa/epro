@@ -9,8 +9,7 @@ class Chatlist extends Component
 {
     public function mount(User $user)
     {
-        $this->user=$user;
-      
+        $this->user=$user;      
     }
 
 
@@ -40,10 +39,10 @@ class Chatlist extends Component
     {
         $this->chats = \App\Models\Chat::where(function ($q) {
             $q->where('sender_id', auth()->id())
-                ->orWhere('sender_id',$this->user['id']);
-        })->where(function ($q) {
+                ->where('receiver_id',$this->user['id']);
+        })->orWhere(function ($q) {
             $q->where('receiver_id', auth()->id())
-                ->orWhere('receiver_id', $this->user['id']);
+                ->where('sender_id', $this->user['id']);
         })->get();
     }
 

@@ -27,6 +27,11 @@ Route::get('/', function () {
 })->name('home');
 
 
+Route::get('/error', function () {
+    dd('error');
+})->name('error');
+
+
 Route::get('serviceprovider/register',[RegisteredUserController::class,'serviceProviderCreate'])->name('serviceprovider.register');
 Route::post('serviceprovider/regitser',[RegisteredUserController::class,'serviceProviderregister'])->name('serviceprovider.register.post');
 

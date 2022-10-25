@@ -18,6 +18,7 @@ class Listofchatusers extends Component
             $q->where('sender_id', $user['id'])
                 ->where('receiver_id',auth()->id());
         })->update(['is_read'=>true]);
+        
 
         $this->emit('updateNewUser',$user);
       

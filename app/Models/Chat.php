@@ -9,6 +9,7 @@ class Chat extends Model
 {
     use HasFactory;
 
+    protected $casts=['is_read'=>'boolean'];
     public function scopeRecievedMessages($query)
     {
         return $query->where('receiver_id', auth()->id());

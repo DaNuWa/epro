@@ -49,13 +49,7 @@
 				<p>{{$profile->description}}</p>
 
 				<div class="product-count">
-					<label for="size">Hours</label>
-					<form action="#" class="display-flex">
-						<div class="qtyminus">-</div>
-						<input type="text" name="quantity" value="1" class="qty">
-						<div class="qtyplus">+</div>
-					</form>
-					<a href="#" class="round-black-btn">Pay</a>
+					<livewire:add-job key="{{ Str::random() }}" :profile="$profile">
 				</div>
 			</div>
 		</div>

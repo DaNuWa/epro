@@ -32,6 +32,7 @@
 <head>
     @stack('styles')
     @livewireStyles
+    </body>
 </head>
 @vite('resources/js/app.js')
 
