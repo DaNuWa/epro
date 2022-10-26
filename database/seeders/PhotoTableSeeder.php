@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Photo;
 use App\Models\Profile;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Faker\Generator;
 use Illuminate\Container\Container;
+use Illuminate\Database\Seeder;
+
 class PhotoTableSeeder extends Seeder
 {
     /**
@@ -16,7 +16,7 @@ class PhotoTableSeeder extends Seeder
      * @return void
      */
 
- /**
+    /**
      * The current Faker instance.
      *
      * @var \Faker\Generator
@@ -38,13 +38,12 @@ class PhotoTableSeeder extends Seeder
         return Container::getInstance()->make(Generator::class);
     }
 
-
     public function run()
     {
-        $profiles=Profile::pluck('id')->toArray();
-        foreach($profiles as $profile){
-            foreach (range(1,5) as $key => $value) {
-                Photo::create(['profile_id'=>$profile,'path'=>$this->faker->imageUrl(400,300, null, true) ]);
+        $profiles = Profile::pluck('id')->toArray();
+        foreach ($profiles as $profile) {
+            foreach (range(1, 5) as $key => $value) {
+                Photo::create(['profile_id' => $profile, 'path' => $this->faker->imageUrl(400, 300, null, true)]);
             }
         }
     }

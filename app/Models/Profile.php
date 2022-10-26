@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Profile extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
-
-
 
     public function registerMediaCollections(): void
     {
@@ -20,7 +18,6 @@ class Profile extends Model implements HasMedia
             // ->singleFile()
             ->acceptsMimeTypes(['image/jpg', 'image/jpeg', 'image/png', 'image/gif']);
     }
-
 
     public function user()
     {
@@ -34,7 +31,7 @@ class Profile extends Model implements HasMedia
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'category_profiles');
+        return $this->belongsToMany(Category::class, 'category_profiles');
     }
 
     public function photos()

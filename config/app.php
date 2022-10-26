@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Colombo',
 
     /*
     |--------------------------------------------------------------------------
@@ -194,8 +194,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class
-
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
     ],
 
@@ -211,7 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-    
-        ])->toArray(),
+
+    ])->toArray(),
 
 ];

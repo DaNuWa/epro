@@ -7,24 +7,20 @@ use Livewire\Component;
 
 class Listofchatusers extends Component
 {
-
-    public function mount($chatusers){
-        $this->chatusers=$chatusers;
+    public function mount($chatusers)
+    {
+        $this->chatusers = $chatusers;
     }
 
     public function updateChatUser($user)
     {
-        Chat::where(function ($q) use($user){
+        Chat::where(function ($q) use ($user) {
             $q->where('sender_id', $user['id'])
-                ->where('receiver_id',auth()->id());
-        })->update(['is_read'=>true]);
-        
+                ->where('receiver_id', auth()->id());
+        })->update(['is_read' => true]);
 
-        $this->emit('updateNewUser',$user);
-      
+        $this->emit('updateNewUser', $user);
     }
-
-
 
     public function render()
     {

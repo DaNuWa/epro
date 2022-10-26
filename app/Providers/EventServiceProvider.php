@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\JobStatusUpdatedEvent;
+use App\Listeners\SendConsumerJobStatusUpdate;
+use App\Listeners\SendProviderJobStatusUpdate;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        JobStatusUpdatedEvent::class => [SendConsumerJobStatusUpdate::class, SendProviderJobStatusUpdate::class],
     ];
 
     /**

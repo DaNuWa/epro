@@ -7,20 +7,15 @@ use Livewire\Component;
 
 class Navigation extends Component
 {
-
     public function regiserAsServiceProvider()
     {
         return to_route('serviceprovider.register');
     }
 
-
-    
-
     public function signin()
     {
         return to_route('login');
     }
-
 
     public function logout()
     {

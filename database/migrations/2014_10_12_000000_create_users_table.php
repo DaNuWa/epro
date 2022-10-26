@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_provider')->default(false);
+            $table->boolean('is_superadmin')->default(false);
             $table->string('first_name');
             $table->string('last_name');
             $table->string('mobile');

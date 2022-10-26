@@ -1,10 +1,11 @@
-<div wire:ignore>
+<div>
     <div class="container">
         <button type="button" class="round-black-btn" data-toggle="modal" data-target="#form">
             Pay
         </button>
     </div>
-    <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div wire:ignore.self class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
@@ -13,14 +14,28 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
+
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                @if($success)
+                <div class="alert alert-success" role="alert">
+                    Your payment has been received.Thank you
+                </div>
+                @endif
                 <div class="modal-body">
 
-                    @if($success)
-                    <div class="alert alert-success" role="alert">
-                        Your payment has been received.Thank you
+                    <div style="margin-left:207px" wire:loading class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
                     </div>
-                    @endif
-
 
                     <div class="form-group">
                         <label>Description</label>
@@ -160,7 +175,9 @@
                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                     const transaction = orderData.purchase_units[0].payments.captures[0];
                     console.log(transaction)
-                    Livewire.emit('transactionSuccess',{'id':transaction.id})
+                    Livewire.emit('transactionSuccess', {
+                        'id': transaction.id
+                    })
 
                 });
             }

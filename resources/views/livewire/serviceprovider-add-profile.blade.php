@@ -9,38 +9,24 @@
         </ul>
     </div>
     @endif
-
-
-    <h2>Add profile</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" wire:model="title" class="form-control" placeholder="Title">
-            </div>
-        </div>
-
+    <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" wire:model="title" class="form-control" placeholder="Title">
     </div>
 
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="company">Rate(hourly)</label>
-                <input type="number" wire:model="rate" class="form-control" placeholder="Rate">
-            </div>
-        </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Rate(hourly)</label>
+        <input type="number" wire:model="rate" class="form-control" placeholder="Rate">
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea wire:model="description" class="form-control" placeholder="Profile description" rows="4" cols="50">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Description</label>
+        <textarea wire:model="description" class="form-control" placeholder="Profile description" rows="4" cols="50">
                     </textarea>
-            </div>
-        </div>
     </div>
+
+
+
 
     <label for="newsletter">Select your categories</label>
     <div class="checkbox">
@@ -54,11 +40,7 @@
 
 
 
-    <x-input.filepond wire:model="images" multiple allowImagePreview imagePreviewMaxHeight="200" allowFileTypeValidation acceptedFileTypes="['image/png', 'image/jpg']" allowFileSizeValidation maxFileSize="4mb" />
-
-    @error('images')
-    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-    @enderror
+    <x-input.filepond wire:model="images" multiple allowImagePreview imagePreviewMaxHeight="200" allowFileTypeValidation acceptedFileTypes="['image/png', 'image/jpg','image/jpeg']" allowFileSizeValidation maxFileSize="4mb" />
 
     <button wire:click="addProfile" class="btn btn-primary">Submit</button>
 </div>

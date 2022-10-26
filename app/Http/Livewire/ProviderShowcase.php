@@ -7,11 +7,10 @@ use Livewire\Component;
 
 class ProviderShowcase extends Component
 {
-
-    public function mount(){
-        $this->profiles=Profile::with('user')->get();
+    public function mount()
+    {
+        $this->profiles = Profile::with('user')->get();
     }
-
 
     public function render()
     {

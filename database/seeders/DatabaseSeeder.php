@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(8)->create();
+        \App\Models\User::factory(8)->create();
 
         \App\Models\User::factory()->create([
             'is_provider' => true,
+            'email'=>'provider@test.com'
         ]);
+        \App\Models\User::factory()->create([
+            'is_provider' => false,
+            'email'=>'consumer@test.com'
+        ]);
+        \App\Models\User::factory()->create([
+            'is_superadmin' => true,
+            'email'=>'admin@test.com',
+            'password'=>Hash::make("password")
+        ]);
+
 
         $this->call(CategoryTableSeeder::class);
         $this->call(ProfileTableSeeder::class);

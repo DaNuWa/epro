@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-
 
 class ProjectTableSeeder extends Seeder
 {
@@ -17,14 +15,14 @@ class ProjectTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach (range(1,10) as $key => $value) {
+        foreach (range(1, 10) as $key => $value) {
             Project::create([
-                'transaction_id'=>Str::uuid(),
-                'provider_id'=>1,
-            'consumer_id'=>8,
-            'description'=>'Test description',
-            'hours'=>2,
-            'amount'=>1000,
+                'transaction_id' => Str::uuid(),
+                'provider_id' => 1,
+                'consumer_id' => 8,
+                'description' => 'Test description',
+                'hours' => 2,
+                'amount' => 1000,
             ]);
         }
     }

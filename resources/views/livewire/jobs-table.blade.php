@@ -1,32 +1,50 @@
 <div>
+    <h1 class="container">All jobs</h1>
+
+    <div style="margin-left:207px" wire:loading class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Description</th>
+                <th scope="col">Transaction Id</th>
+                <th scope="col">Payment recived at</th>
+                <th scope="col">Need to deliver at</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
+
+            @forelse ($allJobs as $job)
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>{{$job->description}}</td>
+                <td>{{$job->transaction_id}}</td>
+                <td>{{$job->created_at}}</td>
+                <td>{{$job->needToDeliverAt()}}</td>
+                <td><span @class(['badge badge-fill', 'badge-warning'=>$job->status=='pending',
+                        'badge-success'=>$job->status=='complete',
+                        'badge-secondary'=>$job->status=='reject',
+                        'badge-info'=>$job->status=='in-progress',
+                        'badge-danger'=>$job->expired()])>{{$job->status}}</span></td>
+                <td>
+                    @if(!$job->started_at)
+                    @if($job->status!='reject')
+                    <button wire:click="markAsStarted({{$job->id}})" type="button" class="btn btn-primary">Mark as started</button>
+                    <button wire:click="markAsRejected({{$job->id}})" type="button" class="btn btn- btn-danger mt-1">Mark as rejected</button>
+                    @endif
+                    @else
+                    <button @if($job->status=='complete') disabled @endif wire:click="markAsCompleted({{$job->id}})" type="button" class="btn btn-primary">Mark as completed</button>
+                    @endif
+                </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            @empty
+            @endforelse
         </tbody>
     </table>
+
+    {{ $allJobs->links() }}
+
 </div>

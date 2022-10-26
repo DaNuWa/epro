@@ -16,13 +16,10 @@ class ServiceProviderMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check()&& auth()->user()->is_provider)
-        {
+        if (auth()->check() && auth()->user()->is_provider) {
             return $next($request);
+        } else {
+            abort(403, "You can't acces this page");
         }
-        else{
-            abort(403,"You can't acces this page");
-        }
-
     }
 }

@@ -1,5 +1,4 @@
-<div class="message-area">
-    <div class="container">
+
         <div class="row">
             <div class="col-12">
                 <div class="chat-area">
@@ -7,18 +6,13 @@
                         <div class="modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="chat-header">
-                                    <div class="msg-search">
-                                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" aria-label="search">
-                                        <a class="add" href="#"><img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/add.svg" alt="add"></a>
-                                    </div>
+                                  
 
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="Open-tab" data-bs-toggle="tab" data-bs-target="#Open" type="button" role="tab" aria-controls="Open" aria-selected="true">Open</button>
+                                            <button class="nav-link active" id="Open-tab" data-bs-toggle="tab" data-bs-target="#Open" type="button" role="tab" aria-controls="Open" aria-selected="true">Chats</button>
                                         </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="Closed-tab" data-bs-toggle="tab" data-bs-target="#Closed" type="button" role="tab" aria-controls="Closed" aria-selected="false">Closed</button>
-                                        </li>
+                                
                                     </ul>
                                 </div>
 
@@ -88,5 +82,4 @@
 
             </div>
         </div>
-    </div>
-</div>
+

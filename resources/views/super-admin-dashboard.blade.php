@@ -4,7 +4,11 @@
 <meta name="csrf-token" content={{ csrf_token() }}>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portofolio | Dashboard</title>
+<title>Epro | Admin</title>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
@@ -25,6 +29,11 @@
 <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
 <!-- summernote -->
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <link href="{{asset('app.css')}}" rel="stylesheet">
 
 
@@ -52,7 +61,7 @@
                         <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Yohan Dhanushka</a>
+                        <a href="#" class="d-block">{{auth()->user()->first_name}}</a>
                     </div>
                 </div>
 
@@ -84,30 +93,11 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('serviceprovider.add.profile')}}" class="nav-link">
+                                    <a href="{{route('admin.home')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Add profile</p>
+                                        <p>View projects</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{route('serviceprovider.chat.view')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View chats</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('serviceprovider.jobs.view')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View jobs</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Testimonial</p>
-                                    </a>
-                                </li>
-
                             </ul>
                         </li>
                     </ul>
@@ -133,57 +123,12 @@
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
                         <section class="container connectedSortable">
                             <br>
+                            <div style="padding: 30px" class="card card-primary">
 
-                            <div class="row">
-                               
-
-                                <div class="col-lg-3 col-xs-6">
-
-                                    <div class="small-box bg-green">
-                                        <div class="inner">
-                                            <h3>{{\App\Models\Project::where('provider_id',auth()->id())->where('status','complete')->count()}}</h3>
-                                            <p>Completed jobs</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-stats-bars"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-xs-6">
-
-                                    <div class="small-box bg-yellow">
-                                        <div class="inner">
-                                        <h3>{{\App\Models\Project::where('provider_id',auth()->id())->where('status','pending')->count()}}</h3>
-                                            <p>Pending jobs</p>
-                                        </div>
-                                        <div class="icon">
-                                        <i class="ion ion-stats-bars"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-xs-6">
-
-                                    <div class="small-box bg-red">
-                                        <div class="inner">
-                                        <h3>{{\App\Models\Project::where('provider_id',auth()->id())->whereNotNull('rejected_at')->count()}}</h3>
-                                            <p>Rejected Jobs</p>
-                                        </div>
-                                        <div class="icon">
-                                        <i class="ion ion-stats-bars"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                @yield('content')
                             </div>
 
-                           <div style="padding: 30px" class="card card-primary">
 
-                           @yield('content')
-                           </div>
-
-                        
 
                         </section>
                         <!-- right col -->
@@ -229,6 +174,18 @@
     <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('dist/js/adminlte.js')}}"></script>
+    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
     @stack('scripts')
 

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CategoryTableSeeder extends Seeder
@@ -15,10 +14,9 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories=['Graphic Design','Type Setting','Video Editing','Coding','Content Creation','Other'];
+        $categories = ['Graphic Design', 'Type Setting', 'Video Editing', 'Coding', 'Content Creation', 'Other'];
         foreach ($categories as $key => $value) {
-            Category::create(['name'=>$categories[$key]]);
+            Category::create(['name' => $categories[$key]]);
         }
-
     }
 }

@@ -7,8 +7,6 @@ use Livewire\Component;
 
 class ProductDetail extends Component
 {
-
-
     public function mount(Profile $profile)
     {
 
@@ -24,8 +22,12 @@ class ProductDetail extends Component
         }
     }
 
-    public function chat(){
-        return to_route('chat.view',$this->profile->id);
+    public function chat()
+    {
+        if(!auth()->check()){
+            return to_route('login');
+        }
+        return to_route('chat.view', $this->profile->id);
     }
 
     public function render()
