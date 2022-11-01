@@ -44,8 +44,7 @@
 
           <div class="col-md-12 col-lg-3 mb-3">
 
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/logo.svg"></img>
-            <p class="mt-4 text-muted">© 2018- 2021 Templatemount.<br>
+            <p class="mt-4 text-muted"> <br>
               All rights reserved.</p>
 
           </div>
@@ -55,7 +54,9 @@
             <h6 class="h6 fw-bold">Store</h6>
 
             <a href="{{route('faq.view')}}" class="text-decoration-none text-muted">Faq</a>
-        
+            <a href="{{route('privacy.view')}}" class="text-decoration-none text-muted">Privacy policy</a>
+            <a href="{{route('conditions.view')}}" class="text-decoration-none text-muted">Terms and conditions</a>
+            <a href="{{route('who.view')}}" class="text-decoration-none text-muted">Who we are</a>
           </div>
         </div>
         <!--row div-->
