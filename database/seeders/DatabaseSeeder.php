@@ -33,9 +33,9 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(CategoryTableSeeder::class);
-        $this->call(ProfileTableSeeder::class);
-        $this->call(PhotoTableSeeder::class);
-        $this->call(ReviewTableSeeder::class);
-        $this->call(ProjectTableSeeder::class);
+        // $this->call(ProfileTableSeeder::class);
+        // $this->call(PhotoTableSeeder::class);
+        // $this->call(ReviewTableSeeder::class);
+        // $this->call(ProjectTableSeeder::class);
     }
 }

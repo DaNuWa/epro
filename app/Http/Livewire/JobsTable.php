@@ -45,9 +45,15 @@ class JobsTable extends Component
 
     public function render()
     {
+        if(auth()->user()->is_provider)
         $this->allJobs = Project::where('provider_id', auth()->id())
         ->latest()
         ->paginate(5);
+        else{
+            $this->allJobs = Project::where('consumer_id', auth()->id())
+            ->latest()
+            ->paginate(5); 
+        }
 
         return view('livewire.jobs-table', ['allJobs' => $this->allJobs])->extends('dashboard');
     }

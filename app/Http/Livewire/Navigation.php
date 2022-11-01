@@ -7,6 +7,10 @@ use Livewire\Component;
 
 class Navigation extends Component
 {
+
+
+    public $term='';
+
     public function regiserAsServiceProvider()
     {
         return to_route('serviceprovider.register');
@@ -27,6 +31,12 @@ class Navigation extends Component
 
         return redirect('/');
     }
+
+    public function updatedTerm($val){
+        $this->emit('filterProfiles',$this->term);
+
+    }
+
 
     public function render()
     {

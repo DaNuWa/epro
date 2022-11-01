@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-center">
-                    <button wire:click="handlePayment" class="btn btn-success">Submit</button>
+                    <button wire:click.prevent="handlePayment" class="btn btn-success">Submit</button>
                 </div>
 
 

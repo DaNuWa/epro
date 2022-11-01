@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Card;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,14 @@ class ServiceProviderMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->is_provider) {
+        if (auth()->check() && auth()->user()->is_provider&& Card::where('user_id', auth()->id())->exists()) {
             return $next($request);
         } else {
-            abort(403, "You can't acces this page");
+            if(!auth()->check()){
+                return to_route('login');
+            }if(auth()->user()->is_provider){
+                return to_route('serviceprovider.register');
+            }
         }
     }
 }

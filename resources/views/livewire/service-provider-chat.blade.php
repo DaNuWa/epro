@@ -54,9 +54,9 @@
                                 <livewire:chatlist key="{{ Str::random() }}" :user="$user">
 
 
-                                    <div class="send-box">
+                                <div class="send-box">
                                         <form action="">
-                                            <input wire:model="message" type="text" class="form-control" aria-label="message…" placeholder="Write message…">
+                                            <input wire:keydown.enter.prevent="sendMessage" @if($file) disabled @endif wire:model="message" type="text" class="form-control" aria-label="message…" placeholder="Write message…">
 
                                             <button type="button" wire:click="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
                                         </form>
@@ -66,13 +66,11 @@
                                                 <div class="button-wrapper">
                                                     <span class="label">
                                                         <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/upload.svg" alt="image title"> attached file
-                                                    </span><input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
+                                                    </span><input type="file"wire:model="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
+                                                    @if($file) <span>{{$file->getClientOriginalName()}}</span> @endif
                                                 </div>
-
-                                               
                                             </div>
                                         </div>
-
                                     </div>
                             </div>
                         </div>

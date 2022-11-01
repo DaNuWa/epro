@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profile_id');
+            $table->foreignId('user_id');
             $table->string('holder_name');
             $table->string('bank_name');
             $table->string('branch_name');

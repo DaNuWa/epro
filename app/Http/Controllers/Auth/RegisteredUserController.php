@@ -30,7 +30,9 @@ class RegisteredUserController extends Controller
 
     public function serviceProviderregister(Request $request)
     {
-        Card::create($request->validated());
+        Card::create($request->except('_token')+['user_id'=>auth()->id()]);
+
+        return to_route('login');
     }
 
     public function store(Request $request)

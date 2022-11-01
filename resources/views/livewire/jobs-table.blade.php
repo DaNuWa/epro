@@ -1,4 +1,5 @@
 <div>
+
     <h1 class="container">All jobs</h1>
 
     <div style="margin-left:207px" wire:loading class="spinner-border text-primary" role="status">
@@ -13,7 +14,9 @@
                 <th scope="col">Payment recived at</th>
                 <th scope="col">Need to deliver at</th>
                 <th scope="col">Status</th>
+                @if(auth()->user()->is_provider)
                 <th scope="col">Action</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -29,6 +32,7 @@
                         'badge-secondary'=>$job->status=='reject',
                         'badge-info'=>$job->status=='in-progress',
                         'badge-danger'=>$job->expired()])>{{$job->status}}</span></td>
+                @if(auth()->user()->is_provider)
                 <td>
                     @if(!$job->started_at)
                     @if($job->status!='reject')
@@ -39,6 +43,7 @@
                     <button @if($job->status=='complete') disabled @endif wire:click="markAsCompleted({{$job->id}})" type="button" class="btn btn-primary">Mark as completed</button>
                     @endif
                 </td>
+                @endif
             </tr>
             @empty
             @endforelse

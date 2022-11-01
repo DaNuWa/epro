@@ -52,21 +52,11 @@
                         <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Yohan Dhanushka</a>
+                        <a href="#" class="d-block">{{auth()->user()->email}}</a>
                     </div>
                 </div>
 
-                <!-- SidebarSearch Form -->
-                <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -83,12 +73,14 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                            @if(auth()->user()->is_provider)
                                 <li class="nav-item">
                                     <a href="{{route('serviceprovider.add.profile')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Add profile</p>
                                     </a>
                                 </li>
+                                @endif
                                 <li class="nav-item">
                                     <a href="{{route('serviceprovider.chat.view')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -101,10 +93,19 @@
                                         <p>View jobs</p>
                                     </a>
                                 </li>
+                                @if(auth()->user()->is_provider)
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('serviceprovider.about.view')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Testimonial</p>
+                                        <p>Settings</p>
+                                    </a>
+                                </li>
+                                @endif
+
+                                <li class="nav-item">
+                                    <a href="{{route('settings.view')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Security settings</p>
                                     </a>
                                 </li>
 
@@ -133,6 +134,8 @@
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
                         <section class="container connectedSortable">
                             <br>
+
+                            @if(auth()->user()->is_provider)
 
                             <div class="row">
                                
@@ -177,6 +180,7 @@
                                 </div>
 
                             </div>
+                            @endif
 
                            <div style="padding: 30px" class="card card-primary">
 

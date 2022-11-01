@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
+<script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
 
 <!--Font awesome!-->
 <script src="https://kit.fontawesome.com/f4e855eb8f.js" crossorigin="anonymous"></script>
@@ -53,41 +54,9 @@
 
             <h6 class="h6 fw-bold">Store</h6>
 
-            <a href="#" class="text-decoration-none text-muted">About us</a>
-            <a href="#" class="text-decoration-none text-muted">Find stories</a>
-            <a href="#" class="text-decoration-none text-muted">Categories</a>
-            <a href="#" class="text-decoration-none text-muted">Blogs</a>
+            <a href="{{route('faq.view')}}" class="text-decoration-none text-muted">Faq</a>
+        
           </div>
-
-          <div class="col-6 col-sm-6 col-md-4 col-lg-2">
-            <h6 class="h6 fw-bold">Information</h6>
-            <a href="#" class="text-decoration-none text-muted">About us</a>
-            <a href="#" class="text-decoration-none text-muted">Find stories</a>
-            <a href="#" class="text-decoration-none text-muted">Categories</a>
-            <a href="#" class="text-decoration-none text-muted">Blogs</a>
-          </div>
-
-          <div class="col-6 col-sm-6 col-md-4 col-lg-2 mt-3 mt-md-0">
-            <h6 class="h6 fw-bold">Support</h6>
-            <a href="#" class="text-decoration-none text-muted">About us</a>
-            <a href="#" class="text-decoration-none text-muted">Find stories</a>
-            <a href="#" class="text-decoration-none text-muted">Categories</a>
-            <a href="#" class="text-decoration-none text-muted">Blogs</a>
-          </div>
-
-          <div class="col-lg-3 mt-3 mt-lg-0">
-
-            <h6 class="h6 fw-bold">Newsletter</h6>
-            <p class="text-muted">Stay in touch with latest updates about our products and offers</p>
-
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-secondary" type="button">Join</button>
-              </div>
-            </div>
-          </div>
-
         </div>
         <!--row div-->
 

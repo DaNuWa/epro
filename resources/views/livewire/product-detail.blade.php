@@ -1,28 +1,35 @@
-<div class="container">
+<div wire:ignore.self class="container">
+
+<div class="row" id="filter">
+		<form>
+	
 	<div class="heading-section">
 		<h2>Profile Details</h2>
 	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<div id="slider" class="owl-carousel product-slider">
-			@forelse($profile->getMedia('projectimages') as $photo)
-				<div class="item">
-				<img src="{{asset('media/'.$photo->id.'/'.$photo->file_name)}}" />
-				</div>
-				@empty
-				@endforelse
 
-			</div>
-			<div id="thumb" class="owl-carousel product-thumb">
+
+	@if ($errors->any())
+	<div class="alert alert-danger">
+		<ul>
+			@foreach ($errors->all() as $error)
+			<li>{{ $error }}</li>
+			@endforeach
+		</ul>
+	</div>
+	@endif
+
+	<div class="row">
+		<div class="col-md-6" style="margin-top: -20px;">
+		<img src="{{asset('media/'.$profile->getMedia('projectimages')[0]->id.'/'.$profile->getMedia('projectimages')[0]->file_name)}}" id="main">
+			<div id="thumbnails">
 				@forelse($profile->getMedia('projectimages') as $photo)
-				<div class="item">
 					<img src="{{asset('media/'.$photo->id.'/'.$photo->file_name)}}" />
-				</div>
 				@empty
 				@endforelse
 
 			</div>
 		</div>
+
 		<div class="col-md-6">
 			<div class="product-dtl">
 				<div class="product-info">
@@ -42,9 +49,9 @@
 							<input type="radio" id="star1" name="rate" value="1" @checked($overallRate>=5)/>
 							<label for="star1" title="text">1 star</label>
 						</div>
-						<span>3 Reviews</span>
+						<span>{{$profile->reviews->count() }} Reviews</span>
 					</div>
-					<div class="product-price-discount"><span>Rs {{$profile->rate}}</span></div>
+					<div class="product-price-discount"><span>$ {{$profile->rate}}</span></div>
 				</div>
 				<p>{{$profile->description}}</p>
 
@@ -56,154 +63,84 @@
 	</div>
 	<div class="product-info-tabs">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item">
-				<a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
-			</li>
+
 			<li class="nav-item">
 				<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews ({{$profile->reviews->count()}})</a>
 			</li>
 		</ul>
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-				{{$profile->description}}
-			</div>
-			<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+
 				<div class="review-heading">REVIEWS</div>
 				@forelse($profile->reviews as $review)
 				<p class="mb-20">{{$review->review}}</p>
 				@empty
 				<p class="mb-20">There are no reviews yet.</p>
 				@endforelse
-				<form class="review-form">
+				<div>
 					<div class="form-group">
-						<label>Your rating</label>
-						<div class="reviews-counter">
-							<div class="rate">
-								<input type="radio" id="star5" name="rate" value="5" />
-								<label for="star5" title="text">5 stars</label>
-								<input type="radio" id="star4" name="rate" value="4" />
-								<label for="star4" title="text">4 stars</label>
-								<input type="radio" id="star3" name="rate" value="3" />
-								<label for="star3" title="text">3 stars</label>
-								<input type="radio" id="star2" name="rate" value="2" />
-								<label for="star2" title="text">2 stars</label>
-								<input type="radio" id="star1" name="rate" value="1" />
-								<label for="star1" title="text">1 star</label>
+						<form>
+							<div class="stars" x-data="{ rate: @entangle('starRate')  }">
+								<input type="radio" name="star" @click="$event.preventDefault();rate=1" val="1" class="star-1" id="star-1" />
+								<label class="star-1" for="star-1">1</label>
+								<input type="radio" name="star" @click="rate=2" val="2" class="star-2" id="star-2" />
+								<label class="star-2" for="star-2">2</label>
+								<input type="radio" name="star" @click="rate=3" val="3" class="star-3" id="star-3" />
+								<label class="star-3" for="star-3">3</label>
+								<input type="radio" name="star" @click="rate=4" val="4" class="star-4" id="star-4" />
+								<label class="star-4" for="star-4">4</label>
+								<input type="radio" name="star" @click="rate=5" val="5" class="star-5" id="star-5" />
+								<label class="star-5" for="star-5">5</label>
+								<span></span>
 							</div>
-						</div>
+						</form>
+
+
 					</div>
 					<div class="form-group">
 						<label>Your message</label>
-						<textarea class="form-control" rows="10"></textarea>
+						<textarea wire:model.defer="review" class="form-control" rows="10"></textarea>
 					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<input type="text" name="" class="form-control" placeholder="Name*">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<input type="text" name="" class="form-control" placeholder="Email Id*">
-							</div>
-						</div>
-					</div>
-					<button class="round-black-btn">Submit Review</button>
-				</form>
+
+					<button wire:click.prevent="submitReview" class="round-black-btn">Submit Review</button>
+				</div>
 			</div>
 		</div>
 	</div>
 
 </div>
-</div>
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script>
-	$(document).ready(function() {
-		var slider = $("#slider");
-		var thumb = $("#thumb");
-		var slidesPerPage =  @json($profile->photos->count());; //globaly define number of elements per page
-		var syncedSecondary = true;
-		slider.owlCarousel({
-			items: 1,
-			slideSpeed: 2000,
-			nav: false,
-			autoplay: false,
-			dots: false,
-			loop: true,
-			responsiveRefreshRate: 200
-		}).on('changed.owl.carousel', syncPosition);
-		thumb
-			.on('initialized.owl.carousel', function() {
-				thumb.find(".owl-item").eq(0).addClass("current");
-			})
-			.owlCarousel({
-				items: slidesPerPage,
-				dots: false,
-				nav: true,
-				item: 4,
-				smartSpeed: 200,
-				slideSpeed: 500,
-				slideBy: slidesPerPage,
-				navText: ['<svg width="18px" height="18px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="25px" height="25px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
-				responsiveRefreshRate: 100
-			}).on('changed.owl.carousel', syncPosition2);
+	window.addEventListener('cantAddReview', event => {
+		toastr.error("You can't add review yet", 'Ooops!')
+	})
 
-		function syncPosition(el) {
-			var count = el.item.count - 1;
-			var current = Math.round(el.item.index - (el.item.count / 2) - .5);
-			if (current < 0) {
-				current = count;
-			}
-			if (current > count) {
-				current = 0;
-			}
-			thumb
-				.find(".owl-item")
-				.removeClass("current")
-				.eq(current)
-				.addClass("current");
-			var onscreen = thumb.find('.owl-item.active').length - 1;
-			var start = thumb.find('.owl-item.active').first().index();
-			var end = thumb.find('.owl-item.active').last().index();
-			if (current > end) {
-				thumb.data('owl.carousel').to(current, 100, true);
-			}
-			if (current < start) {
-				thumb.data('owl.carousel').to(current - onscreen, 100, true);
-			}
-		}
+	window.addEventListener('addedReview', event => {
+		toastr.success('Your review hass been added!', 'success!')
+	})
 
-		function syncPosition2(el) {
-			if (syncedSecondary) {
-				var number = el.item.index;
-				slider.data('owl.carousel').to(number, 100, true);
-			}
-		}
-		thumb.on("click", ".owl-item", function(e) {
-			e.preventDefault();
-			var number = $(this).index();
-			slider.data('owl.carousel').to(number, 300, true);
-		});
+	window.addEventListener('contentChanged', event => {
+	})
 
 
-		$(".qtyminus").on("click", function() {
-			var now = $(".qty").val();
-			if ($.isNumeric(now)) {
-				if (parseInt(now) - 1 > 0) {
-					now--;
-				}
-				$(".qty").val(now);
-			}
-		})
-		$(".qtyplus").on("click", function() {
-			var now = $(".qty").val();
-			if ($.isNumeric(now)) {
-				$(".qty").val(parseInt(now) + 1);
-			}
-		});
-	});
+	var thumbnails = document.getElementById("thumbnails")
+var imgs = thumbnails.getElementsByTagName("img")
+var main = document.getElementById("main")
+var counter=0;
 
-
-
+for(let i=0;i<imgs.length;i++){
+  let img=imgs[i]
+  
+  
+  img.addEventListener("click",function(){
+  main.src=this.src
+})
+  
+}
+	
 </script>
+
+
 @endpush

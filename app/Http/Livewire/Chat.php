@@ -6,10 +6,15 @@ use App\Events\ChatEvent;
 use App\Models\Profile;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Chat extends Component
 {
+    use WithFileUploads;
+
     public $message = '';
+    public $file;
+    public $isFile=false;
 
     public $chatusers = [];
 
@@ -23,7 +28,7 @@ class Chat extends Component
     {
         $this->profile = $profile;
 
-        if(auth()->user()->is_provider){
+        if (auth()->user()->is_provider) {
             return to_route('serviceprovider.chat.view');
         }
 
@@ -41,15 +46,38 @@ class Chat extends Component
     }
 
     public function sendMessage()
-    {
-        \App\Models\Chat::create([
-            'sender_id' => auth()->id(),
-            'receiver_id' => $this->profile->user->id,
-            'message' => $this->message,
-        ]);
+    { 
+    
+
+        if ($this->file) {
+
+            //upload the file
+
+            $dir=auth()->id()>$this->profile->user->id?auth()->id()."-". $this->profile->user->id: $this->profile->user->id."-".auth()->id();
+
+           $path= $this->file->store($dir);
+           
+
+            \App\Models\Chat::create([
+                'sender_id' => auth()->id(),
+                'receiver_id' => $this->profile->user->id,
+                'message' => $path,
+                'type'=>'file'
+            ]);
+        } else {
+            if($this->message=='') return; 
+
+            \App\Models\Chat::create([
+                'sender_id' => auth()->id(),
+                'receiver_id' => $this->profile->user->id,
+                'message' => $this->message,
+            ]);
+        }
+
 
         event(new ChatEvent($this->message, auth()->id(), $this->profile->user->id));
         $this->message = '';
+        $this->reset('file');
     }
 
     public function gotMessages()
@@ -61,7 +89,6 @@ class Chat extends Component
     public function render()
     {
         $this->gotMessages();
-        // $this->getChats();
         return view('livewire.chat')->extends('welcome');
     }
 }

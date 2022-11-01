@@ -5,10 +5,14 @@ namespace App\Http\Livewire;
 use App\Events\ChatEvent;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ServiceProviderChat extends Component
 {
+    use WithFileUploads;
+
     public $message = '';
+    public $file;
 
     public $chatusers = [];
 
@@ -35,14 +39,38 @@ class ServiceProviderChat extends Component
 
     public function sendMessage()
     {
-        \App\Models\Chat::create([
-            'sender_id' => auth()->id(),
-            'receiver_id' => $this->user['id'],
-            'message' => $this->message,
-        ]);
+
+
+
+        if ($this->file) {
+
+            //upload the file
+
+            $dir=auth()->id()>$this->user['id']?auth()->id()."-".  $this->user['id']:  $this->user['id']."-".auth()->id();
+
+           $path= $this->file->store($dir);
+           
+
+            \App\Models\Chat::create([
+                'sender_id' => auth()->id(),
+                'receiver_id' =>  $this->user['id'],
+                'message' => $path,
+                'type'=>'file'
+            ]);
+        } else {
+
+            if($this->message=='') return; 
+
+            \App\Models\Chat::create([
+                'sender_id' => auth()->id(),
+                'receiver_id' =>  $this->user['id'],
+                'message' => $this->message,
+            ]);
+        }
 
         event(new ChatEvent($this->message, auth()->id(), $this->user['id']));
         $this->message = '';
+        $this->reset('file');
     }
 
     public function gotMessages()

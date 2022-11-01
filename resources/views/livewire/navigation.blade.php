@@ -1,7 +1,6 @@
 <div class="input-group">
-  <a class="navbar-brand" href="#"> <img class="me-3 me-md-5" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/logo.svg"></img></a>
-  <input type="text" id="input-form" class="form-control" placeholder="Search" aria-label="Text input with dropdown button">
-  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">All type</button>
+  <a class="navbar-brand" href="{{route('home')}}"> <img class="me-3 me-md-5" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/logo.svg"></img></a>
+  <input type="text"  wire:model="term" id="input-form" class="form-control" placeholder="Search" aria-label="Text input with dropdown button">
   <button class="btn btn-primary d-none d-lg-block"><i class="fa-solid fa-magnifying-glass rounded d-none d-lg-block"></i></button>
 
 
@@ -23,17 +22,13 @@
       <p class="d-none d-lg-inline">Register as service provider</p>
     </a>
     @else
+    @endif
     <a href="{{route('serviceprovider.jobs.view')}}" type="button" class="btn btn-outline-primary fw-500 rounded ">
       <p class="d-none d-lg-inline">Dashboard</p>
     </a>
-    @endif
   </div>
   @endif
 
-  <ul class="dropdown-menu  dropdown-menu-start">
-    <li><a class="dropdown-item" href="#">Best</a></li>
-    <li><a class="dropdown-item" href="#">Special</a></li>
-    <li><a class="dropdown-item" href="#">Latest</a></li>
-  </ul>
+
 
 </div>

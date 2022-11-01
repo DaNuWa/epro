@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Livewire\Chat;
+use App\Http\Livewire\Faq;
 use App\Http\Livewire\JobsTable;
 use App\Http\Livewire\ProductDetail;
+use App\Http\Livewire\ProfileInfo;
 use App\Http\Livewire\ProjectDetails;
 use App\Http\Livewire\ProviderShowcase;
 use App\Http\Livewire\ServiceproviderAddProfile;
 use App\Http\Livewire\ServiceProviderChat;
+use App\Http\Livewire\Settings;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,11 +38,15 @@ Route::post('serviceprovider/regitser', [RegisteredUserController::class, 'servi
 Route::get('/', ProviderShowcase::class)->name('home');
 Route::get('/profile/{profile}', ProductDetail::class)->name('profile.view');
 Route::get('/chat/{profile}', Chat::class)->name('chat.view');
+Route::get('/faq', Faq::class)->name('faq.view');
+Route::get('/settings', Settings::class)->name('settings.view');
 
-Route::group(['prefix' => 'serviceprovider', 'middleware' => ['auth:web', 'serviceprovider']], function () {
+
+Route::group(['prefix' => 'serviceprovider', 'middleware' => ['auth:web']], function () {
     Route::get('/user', ServiceproviderAddProfile::class)->name('serviceprovider.add.profile');
     Route::get('/chat', ServiceProviderChat::class)->name('serviceprovider.chat.view');
     Route::get('/jobs', JobsTable::class)->name('serviceprovider.jobs.view');
+    Route::get('/about', ProfileInfo::class)->name('serviceprovider.about.view');
 });
 
 Route::get('admin', ProjectDetails::class, 'serviceProviderCreate')->name('admin.home');
