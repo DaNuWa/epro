@@ -55,6 +55,8 @@ class AddJob extends Component
 
     public function transactionSuccess($event)
     {
+
+        $this->loader=true;
         $project=Project::create([
             'transaction_id' => $event['id'],
             'provider_id' => $this->profile->user_id,
@@ -68,6 +70,9 @@ class AddJob extends Component
         $this->calculateRate();
         event(new JobStatusUpdatedEvent($project));
         $this->success = true;
+        $this->dispatchBrowserEvent('hideLoader');
+
+
 
     }
 

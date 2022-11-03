@@ -1,5 +1,6 @@
-<div class="container">
-  <h3 class="fw-bold mb-sm-3 mb-md-5 text-center text-md-start">New products</h3>
+<div class="container" x-data="{ category: '' }">
+  <br>
+  <h3 class="fw-bold mb-sm-3 mb-md-5 text-center text-md-start">All service providers</h3>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   
@@ -7,8 +8,9 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         @foreach(\App\Models\Category::all() as $category )
-        <li class="nav-item active">
-          <a wire:click.prevent="filterProviders({{$category->id}})" class="nav-link" href="#">{{$category->name}}</a>
+        @php  $cat_id=$category->id; @endphp
+        <li  @click="category=@js($cat_id)"  class="nav-item ">
+          <a wire:click.prevent="filterProviders({{$category->id}})" class="nav-link"  x-bind:class="category==@js($category->id)? 'active' : ''" href="#">{{$category->name}}</a>
         </li>
         @endforeach
       </ul>
@@ -48,5 +50,4 @@
 
 
   </div>
-  <!--row and container div--->
 </div>

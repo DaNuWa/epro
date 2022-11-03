@@ -1261,3 +1261,33 @@ form .stars span {
 .hidden {
   opacity: 0;
 }
+.page {
+  padding: 50px 80px;
+  margin: 50px;
+  background: white;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+
+}
+
+#terms-and-conditions {
+  font-size: 14px;
+}
+#terms-and-conditions h1 {
+  font-size: 34px;
+}
+#terms-and-conditions ol {
+  counter-reset: item;
+}
+#terms-and-conditions li {
+  display: block;
+  margin: 20px 0;
+  position: relative;
+}
+#terms-and-conditions li:before {
+  position: absolute;
+  top: 0;
+  margin-left: -50px;
+  color: magenta;
+  content: counters(item, ".") "    ";
+  counter-increment: item;
+}

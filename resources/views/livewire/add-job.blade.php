@@ -5,7 +5,7 @@
         </button>
     </div>
 
-    <div wire:ignore.self class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div x-data wire:ignore.self class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
@@ -26,16 +26,17 @@
                 </div>
                 @endif
 
+
+                <div  id="loader" style="margin-left:207px;display:none" class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+
                 @if($success)
                 <div class="alert alert-success" role="alert">
                     Your payment has been received.Thank you
                 </div>
                 @endif
                 <div class="modal-body">
-
-                    <div style="margin-left:207px" wire:loading class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
 
                     <div class="form-group">
                         <label>Description</label>
@@ -57,7 +58,7 @@
                 </div>
 
 
-                <div id="cont">
+                <div id="cont" class="border-top-0 d-flex justify-content-center ">
                     <div id="paypal-button-container">
                     </div>
                 </div>
@@ -159,6 +160,13 @@
 
     })
 
+    window.addEventListener('hideLoader', event => {
+
+        var el = document.getElementById('loader')
+        el.style.display = "none";
+
+    })
+
     function init(rate = @js($rate)) {
         paypal.Buttons({
             createOrder: (data, actions) => {
@@ -178,6 +186,9 @@
                     Livewire.emit('transactionSuccess', {
                         'id': transaction.id
                     })
+                    var el = document.getElementById('loader')
+                    el.style.display = "block";
+
 
                 });
             }
