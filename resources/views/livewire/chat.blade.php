@@ -38,15 +38,17 @@
                                 <div class="msg-head">
                                     <div class="row">
                                         <div class="col-8">
+                                            @isset($user['first_name'])
                                             <div class="d-flex align-items-center">
                                                 <span class="chat-icon"><img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/arroleftt.svg" alt="image title"></span>
                                                 <div class="flex-shrink-0">
-                                                    <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
+                                                    <img class="img-fluid"src="https://ui-avatars.com/api/?name={{$user['first_name'].'+'.$user['last_name']}}" alt="user img">
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
-                                                <h3>{{auth()->user()->first_name}}</h3>
+                                                <h3>{{$user['first_name']}}</h3>
                                                 </div>
                                             </div>
+                                            @endisset
                                         </div>
 
                                     </div>
@@ -66,7 +68,7 @@
                                             <div class="attach">
                                                 <div class="button-wrapper">
                                                     <span class="label">
-                                                        <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/upload.svg" alt="image title"> attached file
+                                                        <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/upload.svg" alt="image title"> Attach file
                                                     </span><input type="file"wire:model="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
                                                     @if($file) <span>{{$file->getClientOriginalName()}}</span> @endif
                                                 </div>

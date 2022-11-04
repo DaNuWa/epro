@@ -65,7 +65,7 @@
                                             <div class="attach">
                                                 <div class="button-wrapper">
                                                     <span class="label">
-                                                        <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/upload.svg" alt="image title"> attached file
+                                                        <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/upload.svg" alt="image title">Attach file
                                                     </span><input type="file"wire:model="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
                                                     @if($file) <span>{{$file->getClientOriginalName()}}</span> @endif
                                                 </div>

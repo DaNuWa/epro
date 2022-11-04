@@ -11,11 +11,8 @@
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Status</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Deliver time</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Amount </th>
-                            <!-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Project accepted time</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Project completed time</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Project rejected time</th> -->
-
-
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">View chat</th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -27,9 +24,7 @@
                             <td>{{$project->status}}</td>
                             <td>{{$project->created_at->addHours($project->hours)}}</td>
                             <td>{{$project->amount}}</td>
-                            <!-- <td>{{$project->accepted_at}}</td>
-                            <td>{{$project->completed_at}}</td>
-                            <td>{{$project->rejected_at}}</td> -->
+                           <td><button class="btn bg-success" wire:click="viewChat({{$project->consumer->id}},{{$project->provider->id}})">View chat</button></td>
                         </tr>
                         @empty
                         @endforelse

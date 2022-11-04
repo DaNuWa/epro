@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Livewire\AdminChat;
 use App\Http\Livewire\Chat;
 use App\Http\Livewire\Conditions;
 use App\Http\Livewire\Faq;
@@ -31,9 +32,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/error', function () {
-    dd('error');
-})->name('error');
 
 Route::get('serviceprovider/register', [RegisteredUserController::class, 'serviceProviderCreate'])->name('serviceprovider.register');
 Route::post('serviceprovider/regitser', [RegisteredUserController::class, 'serviceProviderregister'])->name('serviceprovider.register.post');
@@ -56,7 +54,8 @@ Route::group(['prefix' => 'serviceprovider', 'middleware' => ['auth:web']], func
     Route::get('/about', ProfileInfo::class)->name('serviceprovider.about.view');
 });
 
-Route::get('admin', ProjectDetails::class, 'serviceProviderCreate')->name('admin.home');
+Route::get('admin', ProjectDetails::class)->name('admin.home');
+Route::get('adminChat/{consumer_id}/{provider_id}', AdminChat::class)->name('admin.chat');
 
 
 Route::get('/dashboard', function () {

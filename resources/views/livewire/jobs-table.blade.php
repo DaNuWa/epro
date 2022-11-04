@@ -14,9 +14,7 @@
                 <th scope="col">Payment recived at</th>
                 <th scope="col">Need to deliver at</th>
                 <th scope="col">Status</th>
-                @if(auth()->user()->is_provider)
                 <th scope="col">Action</th>
-                @endif
             </tr>
         </thead>
         <tbody>
