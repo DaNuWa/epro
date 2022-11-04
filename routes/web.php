@@ -15,6 +15,7 @@ use App\Http\Livewire\ServiceproviderAddProfile;
 use App\Http\Livewire\ServiceProviderChat;
 use App\Http\Livewire\Settings;
 use App\Http\Livewire\WhoWeAre;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,10 +57,14 @@ Route::group(['prefix' => 'serviceprovider', 'middleware' => ['auth:web']], func
 
 Route::get('admin', ProjectDetails::class)->name('admin.home');
 Route::get('adminChat/{consumer_id}/{provider_id}', AdminChat::class)->name('admin.chat');
+Route::get('admin-logout', function () {
+    Auth::logout();
+    return to_route('login');
+})->name('admin.logout');
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -31,6 +31,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (auth()->user()->is_admin) {
+            return to_route('admin.home');
+        }
+        if (auth()->user()->is_provider) {
+            return to_route('serviceprovider.jobs.view');
+        }
         return  to_route('home');
     }
 

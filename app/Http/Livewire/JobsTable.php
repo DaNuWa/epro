@@ -15,6 +15,7 @@ class JobsTable extends Component
 
     protected $allJobs = [];
 
+
     public function markAsCompleted(Project $project)
     {
         $project->update(['status' => 'complete']);

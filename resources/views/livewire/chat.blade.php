@@ -42,7 +42,7 @@
                                             <div class="d-flex align-items-center">
                                                 <span class="chat-icon"><img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/arroleftt.svg" alt="image title"></span>
                                                 <div class="flex-shrink-0">
-                                                    <img class="img-fluid"src="https://ui-avatars.com/api/?name={{$user['first_name'].'+'.$user['last_name']}}" alt="user img">
+                                                    <img class="img-fluid"src="https://ui-avatars.com/api/?rounded=true&&name={{$user['first_name'].'+'.$user['last_name']}}" alt="user img">
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                 <h3>{{$user['first_name']}}</h3>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="card card-primary" style="padding: 20px;">
 
     @if ($errors->any())
     <div class="alert alert-danger">

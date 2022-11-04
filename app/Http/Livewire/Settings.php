@@ -17,6 +17,12 @@ class Settings extends Component
         $this->view=$view;
     }
 
+    protected $validationAttributes =[
+        'old_password'=>'Old Password',
+        'password'=>'New Password',
+        'new_password'=>'Confirmation Password'
+    ];
+
     protected $rules=[
         'old_password' => ['required'],
         'password' => ['required','min:8','max:12'],

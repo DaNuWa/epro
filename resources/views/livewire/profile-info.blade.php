@@ -1,4 +1,4 @@
-<div>
+<div class="card card-primary">
 
 
     @if ($errors->any())

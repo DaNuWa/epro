@@ -1,8 +1,8 @@
-<div>
+<div class="card " style="padding: 10px; width:56vw">
 
     <h1 class="container">All jobs</h1>
 
-    <div style="margin-left:207px" wire:loading class="spinner-border text-primary" role="status">
+    <div style="margin-left:460px" wire:loading class="spinner-border text-primary" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 
@@ -14,14 +14,16 @@
                 <th scope="col">Payment recived at</th>
                 <th scope="col">Need to deliver at</th>
                 <th scope="col">Status</th>
+                @if(auth()->user()->is_provider)
                 <th scope="col">Action</th>
+                @endif
             </tr>
         </thead>
         <tbody>
 
             @forelse ($allJobs as $job)
             <tr>
-                <td>{{$job->description}}</td>
+                <td style="max-width: 350px">{{$job->description}}</td>
                 <td>{{$job->transaction_id}}</td>
                 <td>{{$job->created_at}}</td>
                 <td>{{$job->needToDeliverAt()}}</td>
