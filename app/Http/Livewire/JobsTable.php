@@ -15,6 +15,14 @@ class JobsTable extends Component
 
     protected $allJobs = [];
 
+    public function mount(){
+
+        if(auth()->user()->is_superadmin){
+            return to_route('admin.home');
+        }
+
+    }
+
 
     public function markAsCompleted(Project $project)
     {
@@ -46,10 +54,14 @@ class JobsTable extends Component
 
     public function render()
     {
-        if(auth()->user()->is_provider)
-        $this->allJobs = Project::where('provider_id', auth()->id())
-        ->latest()
-        ->paginate(5);
+
+        
+        if(auth()->user()->is_provider){
+            $this->allJobs = Project::where('provider_id', auth()->id())
+            ->latest()
+            ->paginate(5);
+        }
+      
         else{
             $this->allJobs = Project::where('consumer_id', auth()->id())
             ->latest()

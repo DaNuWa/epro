@@ -7,7 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+
+    protected $fillable=[
+        'transaction_id',
+        'provider_id',
+        'consumer_id',
+        'description',
+        'status',
+        'hours',
+        'amount',
+        'started_at',
+        'completed_at',
+        'rejected_at'
+    ];
 
     protected $dates = ['started_at', 'accepted_at', 'rejected_at'];
 

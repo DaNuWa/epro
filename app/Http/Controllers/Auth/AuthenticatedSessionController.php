@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (auth()->user()->is_admin) {
+        if (auth()->user()->is_superadmin) {
             return to_route('admin.home');
         }
         if (auth()->user()->is_provider) {

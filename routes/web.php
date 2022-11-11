@@ -55,7 +55,7 @@ Route::group(['prefix' => 'serviceprovider', 'middleware' => ['auth:web']], func
     Route::get('/about', ProfileInfo::class)->name('serviceprovider.about.view');
 });
 
-Route::get('admin', ProjectDetails::class)->name('admin.home');
+Route::get('admin-simple', ProjectDetails::class)->name('admin.home');
 Route::get('adminChat/{consumer_id}/{provider_id}', AdminChat::class)->name('admin.chat');
 Route::get('admin-logout', function () {
     Auth::logout();

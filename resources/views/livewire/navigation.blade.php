@@ -1,5 +1,5 @@
 <div class="input-group">
-  <a class="navbar-brand" href="{{route('home')}}"><img width="70" height="70" class="me-3 me-md-5" src="{{asset('logo.png')}}"></img> </a>
+  <a class="navbar-brand" href="{{route('home')}}"><img width="100"  style="margin-top: 10px;" class="me-3 me-md-5" src="{{asset('logo.png')}}"></img> </a>
   <input type="text"  wire:model="term" id="input-form" class="form-control" placeholder="Search" aria-label="Text input with dropdown button">
   <button class="btn btn-primary d-none d-lg-block"><i class="fa-solid fa-magnifying-glass rounded d-none d-lg-block"></i></button>
 

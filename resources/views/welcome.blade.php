@@ -50,8 +50,8 @@
 
           <div class="col-6 col-sm-6 col-md-4 col-lg-2">
 
-            <h6 class="h6 fw-bold">Store</h6>
 
+          <div style="width: 550px; margin-top:46px;" class="d-flex justify-content-around">
             <a href="{{route('faq.view')}}" class="text-decoration-none text-muted">Faq</a>
             <a href="{{route('privacy.view')}}" class="text-decoration-none text-muted">Privacy policy</a>
             <a href="{{route('conditions.view')}}" class="text-decoration-none text-muted">Terms and conditions</a>

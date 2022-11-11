@@ -38,16 +38,16 @@
 
 							<div class="reviews-counter">
 								<div class="rate">
-									<input type="radio" id="star5" name="rate" value="5" @checked($overallRate>=1) />
-									<label for="star5" title="text">5 stars</label>
-									<input type="radio" id="star4" name="rate" value="4" @checked($overallRate>=2) />
-									<label for="star4" title="text">4 stars</label>
-									<input type="radio" id="star3" name="rate" value="3" @checked($overallRate>=3) />
-									<label for="star3" title="text">3 stars</label>
-									<input type="radio" id="star2" name="rate" value="2" @checked($overallRate>=4)/>
-									<label for="star2" title="text">2 stars</label>
-									<input type="radio" id="star1" name="rate" value="1" @checked($overallRate>=5)/>
-									<label for="star1" title="text">1 star</label>
+									<input type="radio" id="star5"  value="5" @checked($overallRate>=5) />
+									<label for="star5" title="5 star">5 stars</label>
+									<input type="radio" id="star4"  value="4" @checked($overallRate>=4) />
+									<label for="star4" title="4 star">4 stars</label>
+									<input type="radio" id="star3"  value="3" @checked($overallRate>=3) />
+									<label for="star3" title="3 star">3 stars</label>
+									<input type="radio" id="star2"  value="2" @checked($overallRate>=2)/>
+									<label for="star2" title="2 star">2 stars</label>
+									<input type="radio" id="star1"  value="1" @checked($overallRate>=1)/>
+									<label for="star1" title="1 star">1 star</label>
 								</div>
 								<span>{{$profile->reviews->count() }} Reviews</span>
 							</div>

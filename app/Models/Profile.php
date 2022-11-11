@@ -9,8 +9,16 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Profile extends Model implements HasMedia
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
     use InteractsWithMedia;
+
+    protected $fillable = [
+        'title',
+        'user_id',
+        'description',
+        'rate',
+    ];
 
     public function registerMediaCollections(): void
     {
