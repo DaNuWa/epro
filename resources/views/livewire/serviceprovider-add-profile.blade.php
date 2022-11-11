@@ -40,7 +40,7 @@
 
 
 
-    <x-input.filepond wire:model="images" multiple allowImagePreview imagePreviewMaxHeight="200" allowFileTypeValidation acceptedFileTypes="['image/png', 'image/jpg','image/jpeg']" allowFileSizeValidation maxFileSize="4mb" />
+    <x-input.filepond wire:model="images" multiple allowImagePreview imagePreviewMaxHeight="200" allowFileTypeValidation acceptedFileTypes="['image/png', 'image/jpg','image/jpeg']" allowFileSizeValidation maxFileSize="10mb" />
 
     <button wire:click="addProfile" class="btn btn-primary">Submit</button>
 </div>

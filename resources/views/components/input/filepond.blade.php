@@ -8,7 +8,7 @@
                 allowMultiple: {{ $attributes->has('multiple') ? 'true' : 'false' }},
                 server: {
                     process:(fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-                        @this.upload('{{ $attributes->whereStartsWith('wire:model')->first() }}', file, load, error, progress)
+                        @this.uploadMultiple('{{ $attributes->whereStartsWith('wire:model')->first() }}', file, load, error, progress)
                     },
                     revert: (filename, load) => {
                         @this.removeUpload('{{ $attributes->whereStartsWith('wire:model')->first() }}', filename, load)
