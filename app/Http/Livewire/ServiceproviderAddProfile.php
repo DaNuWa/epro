@@ -19,6 +19,8 @@ class ServiceproviderAddProfile extends Component
 
     public $images = [];
 
+    public $photos=[];
+
     public $selectedCategories = [];
 
     public function addProfile()
@@ -40,11 +42,14 @@ class ServiceproviderAddProfile extends Component
         ]);
 
         $profile->categories()->attach($this->selectedCategories);
-
-        collect($this->images)->each(fn ($image) => $profile->addMedia($image->getRealPath())->toMediaCollection('projectimages')
+        collect($this->photos)->each(fn ($image) => $profile->addMedia($image->getRealPath())->toMediaCollection('projectimages')
         );
 
         return to_route('profile.view', $profile);
+    }
+
+    public function updatedImages($val){
+        $this->photos[]=$val[0];
     }
 
     public function render()
