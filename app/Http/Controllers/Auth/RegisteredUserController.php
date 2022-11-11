@@ -32,6 +32,8 @@ class RegisteredUserController extends Controller
     {
         Card::create($request->except('_token')+['user_id'=>auth()->id()]);
 
+        auth()->user()->update(['is_provider'=>true]);
+
         return to_route('login');
     }
 

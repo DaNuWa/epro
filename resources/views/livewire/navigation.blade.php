@@ -11,6 +11,12 @@
       <p  class="d-none d-lg-inline">Sign in</p>
     </a>
   </div>
+  <div style="margin-top: 15px !important;" class="ms-md-5  mt-md-0">
+    <a wire:click="register" type="button" class="btn btn-outline-primary fw-500 rounded ">
+      <i class="fa-solid fa-user me-lg-2"></i>
+      <p  class="d-none d-lg-inline">Register</p>
+    </a>
+  </div>
   @else
   <div style="margin-top: 15px !important;" class="ms-md-5 mt-5 mt-md-0">
     <a type="button" wire:click="logout" class="btn btn-outline-primary fw-500 rounded ">

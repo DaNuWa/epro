@@ -21,6 +21,11 @@ class Navigation extends Component
         return to_route('login');
     }
 
+    public function register()
+    {
+        return to_route('register');
+    }
+
     public function logout()
     {
         Auth::guard('web')->logout();
