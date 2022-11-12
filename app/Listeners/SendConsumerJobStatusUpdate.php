@@ -28,7 +28,7 @@ class SendConsumerJobStatusUpdate
      */
     public function handle(JobStatusUpdatedEvent $event)
     {
-        $user=User::find($event->project->provider_id);
+        $user=User::find($event->project->consumer_id);
         Mail::to($user)->send(new ProjectStatusUpdatedMail($event->project));
     }
 }
