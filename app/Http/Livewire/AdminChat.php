@@ -22,7 +22,9 @@ class AdminChat extends Component
             $this->consumer = User::find($consumer_id);
             $this->provider = User::find($provider_id);
         }else{
-            abort(403,'Unauthorized Action');
+            if(!auth()->user()->is_superadmin){
+                abort(403,'Unauthorized Action');
+            }
         }
        
     }
