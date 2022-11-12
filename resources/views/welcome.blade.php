@@ -56,6 +56,8 @@
             <a href="{{route('privacy.view')}}" class="text-decoration-none text-muted">Privacy policy</a>
             <a href="{{route('conditions.view')}}" class="text-decoration-none text-muted">Terms and conditions</a>
             <a href="{{route('who.view')}}" class="text-decoration-none text-muted">Who we are</a>
+            <a href="https://www.facebook.com/profile.php?id=100087761490713" target="_blank" class="text-decoration-none text-muted"><ion-icon name="logo-facebook" size="small"></ion-icon></i></a>
+            <a href="https://instagram.com/epro.lk?igshid=YmMyMTA2M2Y=" target="_blank" class="text-decoration-none text-muted"><ion-icon name="logo-instagram" size="small"></ion-icon></i></a>
           </div>
         </div>
         <!--row div-->
