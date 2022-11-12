@@ -28,8 +28,10 @@ class CheckIfAdmin
      */
     private function checkIfUserIsAdmin($user)
     {
-        return (auth()->user()->is_superadmin == 1);
-        // return true;
+        if(auth()->check()){
+            return (auth()->user()->is_superadmin == 1);
+        }
+        return to_route('login');
     }
 
     /**
@@ -44,7 +46,7 @@ class CheckIfAdmin
             return response(trans('backpack::base.unauthorized'), 401);
         } else {
             auth()->logout();
-            return redirect()->guest(backpack_url('login'));
+            return to_route('login');
         }
     }
 
