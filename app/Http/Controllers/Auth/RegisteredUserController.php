@@ -34,6 +34,8 @@ class RegisteredUserController extends Controller
 
         auth()->user()->update(['is_provider'=>true]);
 
+        auth()->logout();
+
         return to_route('login');
     }
 
