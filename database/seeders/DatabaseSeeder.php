@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Card;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,16 +21,19 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'is_provider' => true,
-            'email'=>'provider@test.com'
+            'email' => 'provider@test.com'
         ]);
+
+        $this->call(CardTableSeeder::class);
+
         \App\Models\User::factory()->create([
             'is_provider' => false,
-            'email'=>'consumer@test.com'
+            'email' => 'consumer@test.com'
         ]);
         \App\Models\User::factory()->create([
             'is_superadmin' => true,
-            'email'=>'admin@test.com',
-            'password'=>Hash::make("password")
+            'email' => 'admin@test.com',
+            'password' => Hash::make("password")
         ]);
 
 
