@@ -59,8 +59,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-
-                        <li class="nav-item">
+                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
@@ -77,7 +76,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="{{route('backpack.dashboard')}}" class="nav-link">
+                                    <a href="{{route('user.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Advanced dashboard</p>
                                     </a>

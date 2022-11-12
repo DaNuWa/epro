@@ -64,7 +64,7 @@ Route::get('admin-logout', function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('super-admin-dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

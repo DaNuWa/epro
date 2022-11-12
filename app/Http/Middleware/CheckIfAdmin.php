@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckIfAdmin
 {
@@ -27,8 +28,8 @@ class CheckIfAdmin
      */
     private function checkIfUserIsAdmin($user)
     {
-         return ($user->is_superadmin == 1);
-       
+        return (auth()->user()->is_superadmin == 1);
+        // return true;
     }
 
     /**
@@ -42,7 +43,8 @@ class CheckIfAdmin
         if ($request->ajax() || $request->wantsJson()) {
             return response(trans('backpack::base.unauthorized'), 401);
         } else {
-          abort(403,'You can\t access this page');
+            auth()->logout();
+            return redirect()->guest(backpack_url('login'));
         }
     }
 
@@ -59,7 +61,9 @@ class CheckIfAdmin
             return $this->respondToUnauthorizedRequest($request);
         }
 
-        if (! $this->checkIfUserIsAdmin(backpack_user())) {
+        if (!$this->checkIfUserIsAdmin(backpack_user())) {
+            // auth()->logout();
+            // return to_route('home');
             return $this->respondToUnauthorizedRequest($request);
         }
 
