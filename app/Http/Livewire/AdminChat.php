@@ -12,6 +12,8 @@ class AdminChat extends Component
 
     public function mount($consumer_id,$provider_id)
     {
+        $this->consumer = User::find($consumer_id);
+        $this->provider = User::find($provider_id);
         if(Chat::where(function($query) use($provider_id,$consumer_id){
             $query->where('receiver_id',$consumer_id)
             ->where('sender_id',$provider_id);
@@ -20,7 +22,7 @@ class AdminChat extends Component
             ->where('sender_id',$consumer_id);
         })->exists()){
             $this->consumer = User::find($consumer_id);
-            $this->provider = User::find($provider_id);
+            $this->provider = User::find($provider_id);dd($this);
         }else{
             if(!auth()->user()->is_superadmin){
                 abort(403,'Unauthorized Action');
@@ -63,6 +65,6 @@ class AdminChat extends Component
     public function render()
     {
         $this->getChats();
-        return view('livewire.admin-chat')->extends('dashboard');
+        return view('livewire.admin-chat')->extends('super-admin-dashboard');
     }
 }
