@@ -30,12 +30,10 @@ class RegisteredUserController extends Controller
 
     public function serviceProviderregister(Request $request)
     {
-        Card::create($request->except('_token')+['user_id'=>auth()->id()]);
+        Card::create($request->except('_token')+['user_id'=>$request->user_id]);
 
-        auth()->user()->update(['is_provider'=>true]);
-
-        auth()->logout();
-
+        $user=User::find($request->user_id);
+        $user->update(['is_provider'=>true]);
         return to_route('login');
     }
 
@@ -55,6 +53,12 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+       
+
+        if( $request->input('isSeller') ? true : false){
+            return  to_route('serviceprovider.register',[$user->id]);
+        }
 
         event(new Registered($user));
 

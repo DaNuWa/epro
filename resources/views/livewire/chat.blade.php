@@ -58,6 +58,7 @@
 
 
                                     <div class="send-box">
+                                    @error('message') <span class="text-danger ">{{ $message }}</span> @enderror
                                         <form action="">
                                             <input wire:keydown.enter.prevent="sendMessage" @if($file) disabled @endif wire:model="message" type="text" class="form-control" aria-label="message…" placeholder="Write message…">
 

@@ -18,6 +18,8 @@
                 <x-input-error :messages="$errors->get('holder_name')" class="mt-2" />
             </div>
 
+            <input type="hidden" value="{{request()->user}}" name="user_id">
+
 
 
             <div class="mt-4">
