@@ -20,6 +20,8 @@ class ServiceProviderChat extends Component
 
     public $user;
 
+    protected $rules = ['message' => ['nullable', 'max:255']];
+
     protected $listeners = ['updateNewUser' => 'updateChatUser'];
 
     public function mount()
@@ -40,6 +42,7 @@ class ServiceProviderChat extends Component
     public function sendMessage()
     {
 
+        $this->validate();
 
 
         if ($this->file) {
@@ -71,6 +74,10 @@ class ServiceProviderChat extends Component
         event(new ChatEvent($this->message, auth()->id(), $this->user['id']));
         $this->message = '';
         $this->reset('file');
+    }
+
+    public function updated(){
+        $this->validate();
     }
 
     public function gotMessages()

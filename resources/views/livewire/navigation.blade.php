@@ -24,9 +24,6 @@
       <p class="d-none d-lg-inline">Sign out</p>
     </a>
     @if(!auth()->user()->is_provider)
-    <a wire:click="regiserAsServiceProvider" type="button" class="btn btn-outline-primary fw-500 rounded ">
-      <p class="d-none d-lg-inline">Register as service provider</p>
-    </a>
     @else
     @endif
     <a href="{{route('serviceprovider.jobs.view')}}" type="button" class="btn btn-outline-primary fw-500 rounded ">

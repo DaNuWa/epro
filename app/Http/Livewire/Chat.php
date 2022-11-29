@@ -14,13 +14,15 @@ class Chat extends Component
 
     public $message = '';
     public $file;
-    public $isFile=false;
+    public $isFile = false;
 
     public $chatusers = [];
 
     public $channel = '';
 
     public $user;
+
+    protected $rules = ['message' => ['nullable', 'max:255']];
 
     protected $listeners = ['updateNewUser' => 'updateChatUser'];
 
@@ -46,26 +48,26 @@ class Chat extends Component
     }
 
     public function sendMessage()
-    { 
-    
+    {
 
+        $this->validate();
         if ($this->file) {
 
             //upload the file
 
-            $dir=auth()->id()>$this->profile->user->id?auth()->id()."-". $this->profile->user->id: $this->profile->user->id."-".auth()->id();
+            $dir = auth()->id() > $this->profile->user->id ? auth()->id() . "-" . $this->profile->user->id : $this->profile->user->id . "-" . auth()->id();
 
-           $path= $this->file->store($dir);
-           
+            $path = $this->file->store($dir);
+
 
             \App\Models\Chat::create([
                 'sender_id' => auth()->id(),
                 'receiver_id' => $this->profile->user->id,
                 'message' => $path,
-                'type'=>'file'
+                'type' => 'file'
             ]);
         } else {
-            if($this->message=='') return; 
+            if ($this->message == '') return;
 
             \App\Models\Chat::create([
                 'sender_id' => auth()->id(),
@@ -78,6 +80,10 @@ class Chat extends Component
         event(new ChatEvent($this->message, auth()->id(), $this->profile->user->id));
         $this->message = '';
         $this->reset('file');
+    }
+
+    public function updated(){
+        $this->validate();
     }
 
     public function gotMessages()
