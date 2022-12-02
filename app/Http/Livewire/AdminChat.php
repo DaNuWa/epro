@@ -22,7 +22,7 @@ class AdminChat extends Component
             ->where('sender_id',$consumer_id);
         })->exists()){
             $this->consumer = User::find($consumer_id);
-            $this->provider = User::find($provider_id);dd($this);
+            $this->provider = User::find($provider_id);
         }else{
             if(!auth()->user()->is_superadmin){
                 abort(403,'Unauthorized Action');
