@@ -27,7 +27,7 @@
                                                 @else
                                                 <p> {{$chat->message}} </p>
                                                 @endif
-                                                <span class="time"><a href="#" class="badge badge-info">Concumer</a> {{$chat->created_at->format('d M, H:mA')}}</span>
+                                                <span class="time"><a href="#" class="badge badge-info">Consumer</a> {{$chat->created_at->format('d M, H:mA')}}</span>
                                             </li>
                                             @endif
                                             @empty
